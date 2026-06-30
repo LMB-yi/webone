@@ -32,16 +32,9 @@ const routes = [
     ]
   }
 ]
-
 router.beforeEach((to, from, next) => {
-  if (!localStorage.getItem('token')) {
-    localStorage.setItem('token', 'demo_token')
-    localStorage.setItem('userInfo', JSON.stringify({ id: 1, phone: '13800138000', name: '演示用户', role: 'resident', avatar: '' }))
-  }
-  if (to.path === '/login' && localStorage.getItem('token')) {
-    next('/dashboard')
-    return
-  }
+  next()
+})
   next()
 })
 
