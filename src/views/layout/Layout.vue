@@ -113,29 +113,16 @@ const route = useRoute()
 const activeMenu = computed(() => route.path)
 const unreadCount = ref(0)
 
-// 用户信息
 const userInfo = ref({
   id: 0,
   username: '',
-  role: 'resident'
+  role: 'admin'
 })
 
-// 角色权限配置
-const rolePermissions = {
-  admin: ['mutual-aids', 'group-buys', 'notices', 'home-services', 'idle-items', 'credit', 'users'],
-  property: ['mutual-aids', 'group-buys', 'notices', 'home-services', 'idle-items', 'credit', 'users'],
-  repair: ['credit'],
-  resident: ['mutual-aids', 'group-buys', 'notices', 'home-services', 'idle-items', 'credit']
-}
-
-// 检查是否有权限访问某个菜单
 const canAccess = (menuKey) => {
-  const role = userInfo.value.role
-  if (role === 'admin') return true
-  return rolePermissions[role]?.includes(menuKey) || false
+  return true
 }
 
-// 角色标签
 const roleLabel = computed(() => {
   const labels = { admin: '管理员', property: '物业', repair: '维修', resident: '居民' }
   return labels[userInfo.value.role] || '用户'
@@ -146,7 +133,6 @@ const roleTagType = computed(() => {
   return types[userInfo.value.role] || 'info'
 })
 
-// 获取用户信息
 const loadUserInfo = () => {
   const stored = localStorage.getItem('userInfo')
   if (stored) {
