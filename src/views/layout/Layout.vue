@@ -134,10 +134,8 @@ const roleTagType = computed(() => {
 })
 
 const loadUserInfo = () => {
-  const stored = localStorage.getItem('userInfo')
-  if (stored) {
-    userInfo.value = JSON.parse(stored)
-  }
+  userInfo.value = { id: 1, username: '演示管理员', role: 'admin', avatar: '' }
+  localStorage.setItem('userInfo', JSON.stringify(userInfo.value))
 }
 
 const fetchUnreadCount = async () => {
