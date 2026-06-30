@@ -32,9 +32,13 @@ const routes = [
     ]
   }
 ]
-router.beforeEach((to, from, next) => {
-  next()
+
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes
 })
+
+router.beforeEach((to, from, next) => {
   next()
 })
 
