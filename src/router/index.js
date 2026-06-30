@@ -33,18 +33,14 @@ const routes = [
   }
 ]
 
-const router = createRouter({
-  history: createWebHashHistory(),
-  routes
-})
-
 router.beforeEach((to, from, next) => {
-  if (to.path !== '/login' && to.path !== '/register') {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      next('/login')
-      return
-    }
+  if (!localStorage.getItem('token')) {
+    localStorage.setItem('token', 'demo_token')
+    localStorage.setItem('userInfo', JSON.stringify({ id: 1, phone: '13800138000', name: '演示用户', role: 'resident', avatar: '' }))
+  }
+  if (to.path === '/login' && localStorage.getItem('token')) {
+    next('/dashboard')
+    return
   }
   next()
 })
